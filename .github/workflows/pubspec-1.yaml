@@ -1,0 +1,29 @@
+name: flosi
+description: Flosi - personal finance tracker (income, expenses, loans).
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  sqflite: ^2.3.0
+  path: ^1.9.0
+  intl: any
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon.png"
+  adaptive_icon_background: "#0B6B4A"
+  adaptive_icon_foreground: "assets/icon_fg.png"
