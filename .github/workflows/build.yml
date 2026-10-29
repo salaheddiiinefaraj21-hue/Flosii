@@ -25,8 +25,16 @@ jobs:
         run: |
           flutter create --org com.flosi --project-name flosi --platforms android app
           rm -rf app/test
-          cp *.dart app/lib/
-          cp pubspec.yaml app/pubspec.yaml
+          cp *.dart app/lib/ 2>/dev/null || true
+          cp lib/*.dart app/lib/ 2>/dev/null || true
+          cp .github/workflows/*.dart app/lib/ 2>/dev/null || true
+          for f in pubspec.yaml lib/pubspec.yaml .github/workflows/pubspec.yaml; do
+            if [ -f "$f" ]; then cp "$f" app/pubspec.yaml; break; fi
+          done
+          for f in main db state util widgets txn_sheet home_page history_page reports_page loans_page more_page; do
+            test -f app/lib/$f.dart || { echo "MISSING FILE: $f.dart"; exit 1; }
+          done
+          grep -q sqflite app/pubspec.yaml || { echo "MISSING FILE: pubspec.yaml"; exit 1; }
           mkdir -p app/assets
           cp icon.png icon_fg.png app/assets/
           sed -i 's/android:label="[^"]*"/android:label="Flosi"/' app/android/app/src/main/AndroidManifest.xml
