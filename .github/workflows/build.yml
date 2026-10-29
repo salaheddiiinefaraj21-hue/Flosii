@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -36,4 +36,3 @@ jobs:
         with:
           name: Flosi-Release-APK
           path: build/app/outputs/flutter-apk/app-release.apk
-          
